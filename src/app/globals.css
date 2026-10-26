@@ -1,26 +1,264 @@
 @import "tailwindcss";
 
+/*
+ * Colours are the mobile app's own (mobile/src/theme/index.js, dark palette):
+ * the deep indigo ground, the violet for actions, the lavender and pink glows,
+ * and the logo's orb gradient (#F4A6FF → #8F5BFF → #2A1BB0).
+ */
+@theme {
+  --color-night: #07061c;
+  --color-deep: #0c0a2a;
+  --color-sheet: #15123f;
+  --color-ink: #f4f2ff;
+  --color-dim: #bab5dd;
+  --color-faint: #8b86b8;
+  --color-violet: #7b66e8;
+  --color-violet-deep: #5b49b2;
+  --color-lavender: #a593ff;
+  --color-pink: #f6a6fe;
+  --color-orchid: #c45ff8;
+  --color-cobalt: #2715cb;
+  --color-navy: #100b52;
+
+  --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-night);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-night);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(123 102 232 / 0.55);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-pink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ── Atmosphere: the app's two glows, fixed behind everything, plus film grain ── */
+.glows {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60vmax 50vmax at 85% 10%, rgb(59 43 166 / 0.55), transparent 60%),
+    radial-gradient(50vmax 45vmax at 5% 85%, rgb(138 31 181 / 0.35), transparent 60%),
+    var(--color-night);
+}
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ── The orb from the logo mark ── */
+.orb {
+  border-radius: 9999px;
+  background: radial-gradient(circle at 64% 28%, #f4a6ff 0%, #8f5bff 35%, #2a1bb0 100%);
+  box-shadow:
+    0 0 60px rgb(196 95 248 / 0.45),
+    0 0 160px rgb(123 102 232 / 0.35);
+}
+
+/* ── Stills and film frames melt into the page instead of sitting in rectangles ── */
+.img-blend {
+  -webkit-mask-image: radial-gradient(ellipse 72% 78% at 50% 46%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 78% at 50% 46%, #000 58%, transparent 100%);
+}
+.mask-portrait {
+  -webkit-mask-image: radial-gradient(ellipse 50% 62% at 50% 38%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 62% at 50% 38%, #000 62%, transparent 100%);
+}
+.mask-fade-left {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 35%);
+  mask-image: linear-gradient(to right, transparent, #000 35%);
+}
+
+/* Outlined display type */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(165 147 255 / 0.45);
+}
+
+/* ── The words-and-faces strip ── */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+
+/* "Generating" shimmer in the Create chapter */
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(110deg, #15123f 30%, #2b2380 50%, #15123f 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+
+/* ── Frosted glass, as on the app's cards ── */
+.glass {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03));
+  border: 1px solid rgb(170 155 255 / 0.22);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* ── Primary action: the app's violet pill, lit from the orb's pink ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #c45ff8 0%, #7b66e8 45%, #2715cb 100%);
+  box-shadow:
+    0 10px 40px -10px rgb(196 95 248 / 0.7),
+    inset 0 1px 0 rgb(255 255 255 / 0.35);
+  transition:
+    transform 0.25s var(--ease-out-expo),
+    box-shadow 0.25s var(--ease-out-expo);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 16px 50px -10px rgb(196 95 248 / 0.9),
+    inset 0 1px 0 rgb(255 255 255 / 0.35);
+}
+
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 1.4rem;
+  border-radius: 9999px;
+  font-weight: 400;
+  color: var(--color-ink);
+  border: 1px solid rgb(170 155 255 / 0.34);
+  transition: background-color 0.25s;
+}
+.btn-quiet:hover {
+  background: rgb(170 155 255 / 0.1);
+}
+
+@media (max-width: 767px) {
+  .btn-primary,
+  .btn-quiet {
+    min-height: 48px;
+    padding: 0 1.15rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ── Brand-page reveals (one ScrollTrigger toggles .in) ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Voice waveform in the product-video chapter ── */
+@keyframes talk {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.wave span {
+  transform-origin: 50% 50%;
+  transform: scaleY(0.25);
+}
+.wave.on span {
+  animation: talk 0.9s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+.float {
+  animation: float 7s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .btn-primary,
+  .btn-quiet {
+    min-height: 58px;
+    padding: 0 1.9rem;
+    font-size: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wave.on span,
+  .float,
+  .marquee,
+  .shimmer {
+    animation: none;
+  }
+}
+
+/* FAQ disclosure marker */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-plus {
+  transform: rotate(45deg);
 }

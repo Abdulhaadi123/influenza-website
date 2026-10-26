@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local only
+/.claude/
+# Play Console form answers: internal notes, not for the public repo
+/PLAY_CONSOLE_ANSWERS.md

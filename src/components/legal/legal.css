@@ -1,0 +1,150 @@
+/*
+ * Reading styles for the legal pages (privacy, terms, deleting an account, support).
+ * Same ground and colours as the rest of the site (globals.css), set for long text:
+ * a narrow column, generous line height, and headings that are easy to find again.
+ */
+.legal > * + * {
+  margin-top: 1rem;
+}
+
+.legal h2 {
+  margin-top: 3rem;
+  scroll-margin-top: 5rem;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
+
+.legal h3 {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.legal p,
+.legal li {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-dim);
+}
+
+.legal ul,
+.legal ol {
+  padding-left: 1.4rem;
+}
+.legal ul {
+  list-style: disc;
+}
+.legal ol {
+  list-style: decimal;
+}
+.legal li + li {
+  margin-top: 0.55rem;
+}
+.legal li::marker {
+  color: var(--color-violet);
+}
+
+.legal strong {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.legal a {
+  color: var(--color-lavender);
+  text-decoration: underline;
+  text-decoration-color: rgb(165 147 255 / 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.legal a:hover {
+  text-decoration-color: var(--color-lavender);
+}
+
+/* A short statement that should not be missed (what is kept after deletion, for one). */
+.legal .note {
+  border-radius: 1.1rem;
+  border: 1px solid rgb(165 147 255 / 0.25);
+  background: rgb(123 102 232 / 0.09);
+  padding: 1.1rem 1.25rem;
+}
+.legal .note p,
+.legal .note li {
+  color: var(--color-ink);
+}
+
+/* The numbered steps on the delete-account page. */
+.legal .steps {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: step;
+}
+.legal .steps > li {
+  position: relative;
+  counter-increment: step;
+  padding-left: 3rem;
+}
+.legal .steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  display: grid;
+  height: 2rem;
+  width: 2rem;
+  place-items: center;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-violet), var(--color-orchid));
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.legal .toc {
+  list-style: none;
+  padding-left: 0;
+  columns: 2;
+  column-gap: 2rem;
+}
+.legal .toc li {
+  break-inside: avoid;
+  margin-top: 0.4rem;
+}
+.legal .toc a {
+  text-decoration: none;
+  color: var(--color-dim);
+}
+.legal .toc a:hover {
+  color: var(--color-ink);
+}
+@media (max-width: 560px) {
+  .legal .toc {
+    columns: 1;
+  }
+}
+
+.legal .two {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 720px) {
+  .legal .two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.legal .card {
+  border-radius: 1.1rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.03);
+  padding: 1.2rem 1.3rem;
+}
+.legal .card h3 {
+  margin-top: 0;
+}
+.legal .card ul {
+  margin-top: 0.8rem;
+}
