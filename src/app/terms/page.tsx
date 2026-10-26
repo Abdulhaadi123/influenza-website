@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage, Mail } from "@/components/legal/LegalPage";
-import { APP_PACKAGE, BRAND, LEGAL_UPDATED, OPERATOR_COUNTRY, OPERATOR_NAME } from "@/lib/site";
+import { APP_PACKAGE, BRAND, GOVERNING_LAW, LEGAL_UPDATED, OPERATOR_ADDRESS, OPERATOR_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Terms of Use | ${BRAND}`,
@@ -168,8 +168,8 @@ export default function TermsPage() {
 
       <h2 id="law">Law that applies</h2>
       <p>
-        These terms are governed by the law of {OPERATOR_COUNTRY}. If you are a consumer, you also keep the protection of the
-        mandatory laws of the country where you live, and you may bring a claim in the courts there.
+        These terms are governed by the law of {GOVERNING_LAW}. If you are a consumer, you also keep the protection of the
+        mandatory laws of the place where you live, and you may bring a claim in the courts there.
       </p>
 
       <h2 id="changes">Changes to these terms</h2>
@@ -180,7 +180,7 @@ export default function TermsPage() {
 
       <h2 id="contact">Contact</h2>
       <p>
-        Questions about these terms: <Mail subject={`${BRAND} terms`} />.
+        Questions about these terms: <Mail subject={`${BRAND} terms`} />, or by post to {OPERATOR_NAME}, {OPERATOR_ADDRESS}.
       </p>
     </LegalPage>
   );

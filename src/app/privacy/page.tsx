@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { LegalPage, Mail } from "@/components/legal/LegalPage";
-import { APP_PACKAGE, BACKUP_RETENTION_DAYS, BRAND, DELETION_REPLY_DAYS, LEGAL_UPDATED, OPERATOR_NAME } from "@/lib/site";
+import {
+  APP_PACKAGE,
+  BACKUP_RETENTION_DAYS,
+  BRAND,
+  DELETION_REPLY_DAYS,
+  LEGAL_UPDATED,
+  OPERATOR_ADDRESS,
+  OPERATOR_ENTITY_ID,
+  OPERATOR_NAME,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Privacy Policy | ${BRAND}`,
@@ -52,8 +61,9 @@ export default function PrivacyPage() {
 
       <h2 id="who">Who we are</h2>
       <p>
-        The {BRAND} app (Android package <code>{APP_PACKAGE}</code>) is run by <strong>{OPERATOR_NAME}</strong> (“we”, “us”).
-        We decide why and how your information is used, so we are the one responsible for it. You can reach us at <Mail />.
+        The {BRAND} app (Android package <code>{APP_PACKAGE}</code>) is run by <strong>{OPERATOR_NAME}</strong> (“we”, “us”),
+        entity ID {OPERATOR_ENTITY_ID}, {OPERATOR_ADDRESS}. We decide why and how your information is used, so we are the one
+        responsible for it. You can reach us at <Mail /> or by post at that address.
       </p>
 
       <h2 id="short">The short version</h2>
@@ -241,8 +251,8 @@ export default function PrivacyPage() {
 
       <h2 id="contact">Contact</h2>
       <p>
-        Questions, requests or complaints about your information: <Mail subject={`${BRAND} privacy`} />. Written by{" "}
-        {OPERATOR_NAME}.
+        Questions, requests or complaints about your information: <Mail subject={`${BRAND} privacy`} />, or by post to{" "}
+        {OPERATOR_NAME}, {OPERATOR_ADDRESS}.
       </p>
     </LegalPage>
   );

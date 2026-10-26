@@ -5,35 +5,41 @@
  * mobile app's screens, packs and prices from PROJECT_STATUS.md, privacy and deletion
  * behaviour from backend/README.md and backend/api/account/delete.js.
  *
- * PLACEHOLDERS — change these before the site goes public:
- *   PLAY_STORE_URL       empty while the app is in internal testing; the page then says
- *                        "Coming soon to Google Play" instead of linking.
- *   EARLY_ACCESS_EMAIL   where "Ask for early access" opens a new email.
- *   CONTACT_EMAIL        shown in the footer.
+ *   SITE_URL             where the site is published (Vercel); Play Console links to its pages.
+ *   PLAY_STORE_URL       empty while the app is in internal testing, so the page says "Coming soon
+ *                        to Google Play" instead of linking. Once the store listing is public, set it to
+ *                        https://play.google.com/store/apps/details?id=com.aiinfluencer.app
+ *   CONTACT_EMAIL        on every legal page and in the footer; deletion requests arrive here.
+ *   EARLY_ACCESS_EMAIL   where "Ask for early access" opens a new email (the same inbox).
  */
 
-export const PLAY_STORE_URL = ""; // PLACEHOLDER, e.g. https://play.google.com/store/apps/details?id=com.aiinfluencer.app
-export const EARLY_ACCESS_EMAIL = "earlyaccess@example.com"; // PLACEHOLDER
-export const CONTACT_EMAIL = "hello@example.com"; // PLACEHOLDER
+export const SITE_URL = "https://influenza-website.vercel.app";
+export const PLAY_STORE_URL = "";
+export const CONTACT_EMAIL = "dexterz.iqbalhussain@gmail.com";
+export const EARLY_ACCESS_EMAIL = CONTACT_EMAIL;
 
 /**
  * The pages Google Play asks for (privacy policy, terms, how to delete an account, support)
  * read the values below. They are not decoration: the policy names who runs the app and
  * promises how long deleted data stays in backups, so each must be true before launch.
- * `npm run build` warns while a PLACEHOLDER is still in place.
+ * `npm run build` warns if one is empty or still says YOUR.
  *
- *   OPERATOR_NAME         who runs the app, as it should read in the policy ("Acme Ltd", or your own name)
- *   OPERATOR_COUNTRY      whose law the Terms follow ("Pakistan")
+ *   OPERATOR_NAME         the company that runs the app, as registered
+ *   OPERATOR_ENTITY_ID    its business entity ID (the filing's confirmation number is not published)
+ *   OPERATOR_ADDRESS      its postal address, for people who write rather than email
+ *   GOVERNING_LAW         whose law the Terms follow: the state the company is in
  *   BACKUP_RETENTION_DAYS how long a database backup is kept on S3: set an S3 lifecycle rule on the
  *                         `backups/` prefix to expire after this many days (backend/README.md, "Backups")
  *   DELETION_REPLY_DAYS   how long someone who asks by email waits for their account to be deleted
  *   LEGAL_UPDATED         change it whenever the policy or terms change
  */
-export const OPERATOR_NAME = "YOUR COMPANY OR NAME"; // PLACEHOLDER
-export const OPERATOR_COUNTRY = "YOUR COUNTRY"; // PLACEHOLDER
+export const OPERATOR_NAME = "QYVERO LLC";
+export const OPERATOR_ENTITY_ID = "0451539778";
+export const OPERATOR_ADDRESS = "412 E Washington Ave, Unit #1158, Washington, NJ 07882, United States";
+export const GOVERNING_LAW = "the State of New Jersey, United States";
 export const BACKUP_RETENTION_DAYS = 30;
 export const DELETION_REPLY_DAYS = 30;
-export const LEGAL_UPDATED = "26 October 2026";
+export const LEGAL_UPDATED = "27 October 2026";
 export const APP_PACKAGE = "com.aiinfluencer.app";
 
 export const BRAND = "Influenza AI";

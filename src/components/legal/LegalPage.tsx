@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { BRAND, CONTACT_EMAIL } from "@/lib/site";
+import { BRAND, CONTACT_EMAIL, OPERATOR_NAME } from "@/lib/site";
 import "./legal.css";
 
 /**
@@ -63,7 +63,7 @@ export function LegalPage({
             ))}
           </ul>
           <p className="text-xs text-faint">
-            © 2026 {BRAND} ·{" "}
+            © 2026 {OPERATOR_NAME} ·{" "}
             <a className="hover:text-ink" href={`mailto:${CONTACT_EMAIL}`}>
               {CONTACT_EMAIL}
             </a>

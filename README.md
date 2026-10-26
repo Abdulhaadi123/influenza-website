@@ -16,13 +16,14 @@ dev server starts answering "Internal Server Error". Stop it first.
 
 ## Publish it on Vercel
 
-The GitHub repo is `Abdulhaadi123/influenza-website`. On vercel.com: **Add New → Project →
-Import** that repo, keep the defaults (Framework: Next.js, build command `npm run build`) and
-**Deploy**. No environment variables are needed. Every push to `main` then redeploys the site,
-and a push to any other branch gets its own preview address.
+The site is live at **https://influenza-website.vercel.app**, deployed by Vercel from the
+GitHub repo `Abdulhaadi123/influenza-website` with the default Next.js settings and no
+environment variables. Every push to `main` redeploys it, and a push to any other branch gets
+its own preview address.
 
 To use your own domain: Vercel project → **Settings → Domains → Add**, then create the DNS
-record Vercel shows. Put that address into Play Console (see "Legal pages" below).
+record Vercel shows. Then change `SITE_URL` in `src/lib/site.ts` and the links in Play Console
+(see "Legal pages" below).
 
 ## Publish it anywhere else
 
@@ -30,17 +31,7 @@ record Vercel shows. Put that address into Play Console (see "Legal pages" below
 npm run build              # writes a static site to out/
 ```
 
-Upload `out/` to any static host. On the existing server with Caddy:
-
-```caddy
-influenza.example.com {            # PLACEHOLDER: the real domain
-	root * /srv/influenza-site/out
-	encode zstd gzip
-	file_server
-	@assets path /_next/static/* /img/*
-	header @assets Cache-Control "public, max-age=31536000, immutable"
-}
-```
+Upload `out/` to any static host; it needs no server code and no rewrite rules.
 
 ## What is on the page
 
@@ -57,18 +48,22 @@ influenza.example.com {            # PLACEHOLDER: the real domain
 
 Words, prices and links that may change live in `src/lib/site.ts`.
 
-## Placeholders to change before going public
+## Business details
 
-In `src/lib/site.ts`:
+All in `src/lib/site.ts`:
 
-- `PLAY_STORE_URL`: empty, so the page says "Coming soon to Google Play".
-- `EARLY_ACCESS_EMAIL`: `earlyaccess@example.com`.
-- `CONTACT_EMAIL`: `hello@example.com`.
+| Setting | Value |
+|---|---|
+| `OPERATOR_NAME` | QYVERO LLC (the copyright line and every legal page) |
+| `OPERATOR_ENTITY_ID` | 0451539778 (Privacy Policy, "Who we are") |
+| `OPERATOR_ADDRESS` | 412 E Washington Ave, Unit #1158, Washington, NJ 07882, United States |
+| `GOVERNING_LAW` | the State of New Jersey, United States (Terms, "Law that applies") |
+| `CONTACT_EMAIL` | dexterz.iqbalhussain@gmail.com, also used for early access |
+| `SITE_URL` | https://influenza-website.vercel.app |
+| `PLAY_STORE_URL` | empty on purpose while the app is in testing: the page says "Coming soon to Google Play". Set it to `https://play.google.com/store/apps/details?id=com.aiinfluencer.app` once the listing is public. |
 
-Also the domain in the Caddy block above. For the legal pages (next section) these three
-must also be filled in, in the same file: `OPERATOR_NAME`, `OPERATOR_COUNTRY`, and
-`CONTACT_EMAIL` (above), and `BACKUP_RETENTION_DAYS` must be true. `npm run build` warns
-while any placeholder is left (`scripts/check-legal.mjs`).
+`npm run build` warns if the name, address, governing law or email is empty or an example
+(`scripts/check-legal.mjs`). `BACKUP_RETENTION_DAYS` must also be true (next section).
 
 ## Legal pages (what Google Play asks for)
 
@@ -89,7 +84,7 @@ admin within `DELETION_REPLY_DAYS` (admin panel → Accounts → delete).
 
 The pages are plain static files (`trailingSlash: true` writes `privacy/index.html`), so they
 need a public HTTPS address before Play will accept them. Play Console wants the exact URLs,
-for example `https://influenza.example.com/privacy/`. Have a lawyer read them before launch:
+for example `https://influenza-website.vercel.app/privacy/`. Have a lawyer read them before launch:
 they are written from the code, not from legal advice.
 
 `PLAY_CONSOLE_ANSWERS.md` (not published) lists what to enter in the Console's own forms.

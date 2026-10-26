@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 // Sora (SIL Open Font License), self-hosted: a geometric grotesque close to the
@@ -12,6 +13,7 @@ const sora = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Influenza AI: create your own AI influencer",
   description:
     "Create AI influencers, produce product videos and bring them to life with motion. Coming soon to Android.",

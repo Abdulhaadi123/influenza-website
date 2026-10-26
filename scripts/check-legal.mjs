@@ -7,9 +7,10 @@ const source = readFileSync(new URL("../src/lib/site.ts", import.meta.url), "utf
 const value = (name) => source.match(new RegExp(`export const ${name} = "([^"]*)"`))?.[1] ?? "";
 
 const checks = [
-  ["CONTACT_EMAIL", (v) => !v || /example\.(com|org|net)$/i.test(v), "is still an example address (it is the contact on every legal page)"],
-  ["OPERATOR_NAME", (v) => !v || /^YOUR\b/.test(v), "still says YOUR COMPANY OR NAME (the policy must name who runs the app)"],
-  ["OPERATOR_COUNTRY", (v) => !v || /^YOUR\b/.test(v), "still says YOUR COUNTRY (the Terms name whose law applies)"],
+  ["CONTACT_EMAIL", (v) => !v || /example\.(com|org|net)$/i.test(v), "is empty or an example address (it is the contact on every legal page)"],
+  ["OPERATOR_NAME", (v) => !v || /^YOUR\b/.test(v), "is empty or still says YOUR (the policy must name who runs the app)"],
+  ["OPERATOR_ADDRESS", (v) => !v || /^YOUR\b/.test(v), "is empty or still says YOUR (the policy gives a postal address)"],
+  ["GOVERNING_LAW", (v) => !v || /\bYOUR\b/.test(v), "is empty or still says YOUR (the Terms name whose law applies)"],
 ];
 
 const problems = checks.filter(([name, bad]) => bad(value(name))).map(([name, , why]) => `  - ${name} ${why}`);
@@ -17,5 +18,5 @@ const problems = checks.filter(([name, bad]) => bad(value(name))).map(([name, , 
 if (problems.length) {
   console.warn("\n⚠  Legal pages are not ready to publish. In src/lib/site.ts:\n" + problems.join("\n") + "\n");
 } else {
-  console.log("Legal pages: contact, operator and country are filled in.");
+  console.log("Legal pages: contact, operator, address and governing law are filled in.");
 }

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Logo, LogoMark } from "@/components/Logo";
 import Tilt from "@/components/Tilt";
-import { CONTACT_EMAIL, FAQ, LOOKS, PACKS, PLAY_STORE_URL, USE_CASES, earlyAccessHref } from "@/lib/site";
+import { CONTACT_EMAIL, FAQ, LOOKS, OPERATOR_NAME, PACKS, PLAY_STORE_URL, USE_CASES, earlyAccessHref } from "@/lib/site";
 
 /*
  * The brand page under the chapters: plain scrolling sections in the same
@@ -378,7 +378,7 @@ export function Footer() {
         />
       </div>
       <div className={`${wrap} mt-14 flex flex-col gap-2 text-xs text-faint md:flex-row md:justify-between`}>
-        <p>© 2026 Influenza AI</p>
+        <p>© 2026 {OPERATOR_NAME}. Influenza AI is made by {OPERATOR_NAME}.</p>
         <p>Images on this page are AI-generated. Google Play is a trademark of Google LLC.</p>
       </div>
       <p
