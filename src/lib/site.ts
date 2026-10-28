@@ -39,7 +39,7 @@ export const OPERATOR_ADDRESS = "412 E Washington Ave, Unit #1158, Washington, N
 export const GOVERNING_LAW = "the State of New Jersey, United States";
 export const BACKUP_RETENTION_DAYS = 30;
 export const DELETION_REPLY_DAYS = 30;
-export const LEGAL_UPDATED = "27 October 2026";
+export const LEGAL_UPDATED = "28 October 2026";
 export const APP_PACKAGE = "com.aiinfluencer.app";
 
 export const BRAND = "Influenza AI";

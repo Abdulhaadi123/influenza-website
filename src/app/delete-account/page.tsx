@@ -39,6 +39,11 @@ export default function DeleteAccountPage() {
         <li>Enter your password and confirm. Your account is deleted at once, and every phone signed in to it is signed out.</li>
       </ol>
       <p>
+        <strong>Signed in with Google and no password?</strong> The box asks you to confirm with Google instead: tap{" "}
+        <strong>Confirm with Google and delete</strong> and choose the same Google account. A different Google account is
+        refused, so nobody else can delete yours.
+      </p>
+      <p>
         Forgotten your password? Use <strong>Forgot password</strong> on the sign-in screen to set a new one, then follow the
         steps above, or ask us by email below.
       </p>
@@ -55,7 +60,7 @@ export default function DeleteAccountPage() {
         <div className="card">
           <h3>Deleted straight away</h3>
           <ul>
-            <li>Your account: email, name and password.</li>
+            <li>Your account: email, name, password (if you have one) and the link to your Google account.</li>
             <li>Every influencer you made.</li>
             <li>Every photo, video and audio file you uploaded, and every image and video made for you, with their previews.</li>
             <li>Your gallery, your queue of generations, your settings.</li>

@@ -86,6 +86,12 @@ export default function PrivacyPage() {
         (an Argon2id hash), so nobody at {BRAND} can read it. We also keep whether you have confirmed your email and when the
         account was created and last changed.
       </p>
+      <p>
+        If you choose <strong>Continue with Google</strong>, Google tells us your email address, your name and a number that
+        identifies your Google account. We keep that number, so the next time you choose Google we find your account. We never
+        receive your Google password. An account made this way has no password of its own until you ask for one from{" "}
+        <strong>Settings → Set a password</strong>.
+      </p>
 
       <h3>Sign-in records</h3>
       <p>
@@ -182,6 +188,11 @@ export default function PrivacyPage() {
           <strong>RevenueCat</strong> and <strong>Google Play</strong> handle credit-pack purchases. RevenueCat receives your
           account number and the purchase details from the store. Google handles the payment itself.
         </li>
+        <li>
+          <strong>Google</strong> signs you in when you choose Continue with Google. Google shows its own account picker on your
+          phone and tells us who you are (see “Account details”); what Google itself receives is described in Google’s privacy
+          policy.
+        </li>
         <li><strong>An email delivery service</strong> sends the confirmation and password-reset emails, so it receives your email address and the message.</li>
         <li><strong>Our server hosting provider</strong> runs the servers the service lives on.</li>
       </ul>
@@ -209,7 +220,7 @@ export default function PrivacyPage() {
 
       <h2 id="rights">Your choices and rights</h2>
       <p>
-        You can see your name and email, change your password and delete your account in the app’s Settings. You can also
+        You can see your name and email, change or set a password and delete your account in the app’s Settings. You can also
         email us to ask for a copy of your information, to correct it, or to object to or limit how we use it. We reply within{" "}
         {DELETION_REPLY_DAYS} days.
       </p>
